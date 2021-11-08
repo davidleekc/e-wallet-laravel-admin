@@ -1,32 +1,30 @@
-version: '3'
+version: '3.7'
 services:
   #PHP Service
   app:
-  build:
-    args:
-      user: david
-      uid: 1000
-    context: ./
-    dockerfile: Dockerfile
-  image: ewallet
-  container_name: ewallet-laravel-app
-  restart: unless-stopped
-  working_dir: /var/www/
-  volumes:
-    - ./:/var/www
-    - ./docker-compose/php/local.ini:/usr/local/etc/php/conf.d/local.ini
-  networks:
-    - ewallnet
+    build:
+      args:
+        user: david
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: ewallet
+    container_name: ewallet-laravel-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - ewallnet
 
-   #Nginx Service
-  webserver:
+  #Nginx Service
+  nginx:
     image: nginx:alpine
     container_name: ewallet-laravel-nginx
     restart: unless-stopped
-    tty: true
     ports:
-      - "80:80"
-      - "443:443"
+      - "80:8000"
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx/conf.d/:/etc/nginx/conf.d/
@@ -35,21 +33,21 @@ services:
      
   #MySQL Service
   db:
-  image: mysql:5.7
-  container_name: ewallet-laravel-db
-  restart: unless-stopped
-  environment:
-    MYSQL_DATABASE: laraveladmindb
-    MYSQL_ROOT_PASSWORD: 9xPatQHvhAW*lx&VEl
-    MYSQL_PASSWORD: 9xPatQHvhAW*lx&VEl
-    MYSQL_USER: laraveladmin
-    SERVICE_TAGS: dev
-    SERVICE_NAME: mysql
-  volumes:
-    - dbdata:/var/lib/mysql/
-    - ./docker-compose/mysql/my.cnf:/etc/mysql/my.cnf
-  networks:
-    - ewallnet
+    image: mysql:5.7
+    container_name: ewallet-laravel-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: laraveladmindb
+      MYSQL_ROOT_PASSWORD: 9xPatQHvhAW*lx&VEl
+      MYSQL_PASSWORD: 9xPatQHvhAW*lx&VEl
+      MYSQL_USER: laraveladmin
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./docker-compose/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - ewallnet
  
 #Docker Networks
 networks:
