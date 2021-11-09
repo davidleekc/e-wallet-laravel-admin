@@ -37,10 +37,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd sodium zip
 RUN docker-php-ext-enable pdo_mysql
-RUN docker-php-ext-configure gd \
---with-png=/usr/include/ \
---with-jpeg=/usr/include/ \
---with-freetype=/usr/include/ 
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg 
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -52,8 +49,6 @@ RUN useradd -u 1000 -ms /bin/bash -g www www
 # Create system user to run Composer and Artisan Commands
 RUN mkdir -p /home/www/.composer && \
     chown -R www:www /home/www
-RUN mkdir -p /var/lib/mysql && \
-    chown -R www:www /var/lib/mysql
 RUN chown -R www-data:www-data /var/www/
 
 # Copy existing application directory contents
