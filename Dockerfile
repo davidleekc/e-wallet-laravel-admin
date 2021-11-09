@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
+    libsodium-dev \
+    libssl-dev \
     zip \
     unzip
 
