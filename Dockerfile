@@ -25,15 +25,14 @@ RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd sodium
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Set working directory
+WORKDIR /var/www
+
+USER $user
+
 # Create system user to run Composer and Artisan Commands
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
 #RUN chmod 777 -R /var/www/storage/
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
-RUN chown -R www-data:www-data /var/www/ \
-    && a2enmod rewrite
-
-# Set working directory
-WORKDIR /var/www
-
-USER $user
+RUN chown -R www-data:www-data /var/www/
