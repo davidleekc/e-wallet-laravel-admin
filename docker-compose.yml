@@ -9,7 +9,7 @@ services:
       context: ./
       dockerfile: Dockerfile
     image: ewallet
-    container_name: ewallet-laravel-app
+    container_name: laravel-app
     restart: unless-stopped
     tty: true
     environment:
@@ -25,12 +25,11 @@ services:
   #Nginx Service
   nginx:
     image: nginx:alpine
-    container_name: ewallet-laravel-nginx
+    container_name: nginx-alpine
     restart: unless-stopped
     tty: true
     ports:
-      - "8080:8080"
-      - "8443:8443"
+      - "8000:80"
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx/conf.d/:/etc/nginx/conf.d/
@@ -40,16 +39,19 @@ services:
   #MySQL Service
   db:
     image: mysql:5.7
-    container_name: ewallet-laravel-db
+    container_name: mysql-db
     restart: unless-stopped
     tty: true
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: laraveladmindb
-      MYSQL_ROOT_PASSWORD: 9xPatQHvhAW*lx&VEl
-      MYSQL_PASSWORD: 9xPatQHvhAW*lx&VEl
-      MYSQL_USER: laraveladmin
+      # MYSQL_DATABASE: laraveladmindb
+      # MYSQL_ROOT_PASSWORD: 9xPatQHvhAW*lx&VEl
+      # MYSQL_PASSWORD: 9xPatQHvhAW*lx&VEl
+      # MYSQL_USER: laraveladmin
+      MYSQL_DATABASE: e-wallet
+      MYSQL_ROOT_PASSWORD: Abcd1234
+      MYSQL_USER: root
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:

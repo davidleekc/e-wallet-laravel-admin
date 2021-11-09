@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "22e936c6849623723e00fd0f1902214a",
+    "content-hash": "2e0083cec9316087cc9f5836d6f36037",
     "packages": [
         {
             "name": "alexusmai/laravel-file-manager",

@@ -36,7 +36,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Remove Cache
 RUN rm -rf /var/cache/apk/*
 
-EXPOSE 8080
 # Create system user to run Composer and Artisan Commands
 #RUN useradd -G www-data,root -u ${uid} -d /home/${user} ${user}
 #RUN chmod -R ugo+rwx /var/www/storage/
