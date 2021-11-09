@@ -160,4 +160,10 @@ return [
             //['disk' => 'public', 'path' => 'files/*', 'access' => 1],
         ],
     ],
+
+    /**
+     * LFM Route prefix
+     * !!! WARNING - if you change it, you should compile frontend with new prefix(baseUrl) !!!
+     */
+    'routePrefix' => 'file-manager',
 ];
