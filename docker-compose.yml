@@ -51,12 +51,10 @@ services:
       # MYSQL_USER: laraveladmin
       MYSQL_DATABASE: e-wallet
       MYSQL_ROOT_PASSWORD: Abcd1234
-      MYSQL_USER: davidleekc
-      MYSQL_PASSWORD: ewalletpw
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
-      - dbdata:/var/lib/mysql/
+      - ./docker-compose/mysql/dbdata/ewallet.sql:/var/lib/mysql/ewallet.sql
       - ./docker-compose/mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - ewallnet
