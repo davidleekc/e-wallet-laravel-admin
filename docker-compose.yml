@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 services:
   #PHP Service
   app:
@@ -11,6 +11,10 @@ services:
     image: ewallet
     container_name: ewallet-laravel-app
     restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
     working_dir: /var/www/
     volumes:
       - ./:/var/www
@@ -23,8 +27,10 @@ services:
     image: nginx:alpine
     container_name: ewallet-laravel-nginx
     restart: unless-stopped
+    tty: true
     ports:
-      - "80:8000"
+      - "80:80"
+      - "443:443"
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx/conf.d/:/etc/nginx/conf.d/
@@ -36,6 +42,9 @@ services:
     image: mysql:5.7
     container_name: ewallet-laravel-db
     restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_DATABASE: laraveladmindb
       MYSQL_ROOT_PASSWORD: 9xPatQHvhAW*lx&VEl
