@@ -42,6 +42,10 @@ RUN rm -rf /var/cache/apk/*
 #RUN chmod -R ugo+rwx /var/www/bootstrap/cache/
 RUN mkdir -p /home/docker/.composer && \
     chown -R docker:docker /home/docker
+RUN mkdir -p /var/lib/mysql && \
+    chown -R docker:docker /var/lib/mysql
+RUN mkdir -p /etc/mysql && \
+    chown -R docker:docker /etc/mysql
 RUN chown -R www-data:www-data /var/www/
 
 USER docker
