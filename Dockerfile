@@ -36,7 +36,7 @@ RUN rm -rf /var/cache/apk/*
 RUN useradd -G www-data,root -u ${uid} -d /home/${user} ${user}
 #RUN chmod -R ugo+rwx /var/www/storage/
 #RUN chmod -R ugo+rwx /var/www/bootstrap/cache/
-RUN mkdir -p /home/${user}.composer && \
+RUN mkdir -p /home/${user}/.composer && \
     chown -R ${user}:${user} /home/$user
 RUN chown -R www-data:www-data /var/www/
 
