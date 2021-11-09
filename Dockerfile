@@ -12,13 +12,14 @@ RUN apt-get update && apt-get install -y \
     sudo \
     git \
     curl \
+    libzip-dev \
     zip \
+    unzip \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
     libsodium-dev \
-    libssl-dev \
-    unzip
+    libssl-dev     
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -26,7 +27,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd sodium
+RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd sodium zip
 RUN docker-php-ext-enable pdo_mysql
 
 # Get latest Composer
@@ -40,8 +41,8 @@ EXPOSE 8080
 #RUN useradd -G www-data,root -u ${uid} -d /home/${user} ${user}
 #RUN chmod -R ugo+rwx /var/www/storage/
 #RUN chmod -R ugo+rwx /var/www/bootstrap/cache/
-RUN mkdir -p /home/${user}/.composer && \
-    chown -R ${user}:${user} /home/$user
+RUN mkdir -p /home/docker/.composer && \
+    chown -R docker:docker /home/docker
 RUN chown -R www-data:www-data /var/www/
 
 USER docker
