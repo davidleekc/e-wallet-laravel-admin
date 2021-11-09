@@ -37,16 +37,10 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN rm -rf /var/cache/apk/*
 
 # Create system user to run Composer and Artisan Commands
-#RUN useradd -G www-data,root -u ${uid} -d /home/${user} ${user}
-#RUN chmod -R ugo+rwx /var/www/storage/
-#RUN chmod -R ugo+rwx /var/www/bootstrap/cache/
 RUN mkdir -p /home/docker/.composer && \
     chown -R docker:docker /home/docker
-RUN mkdir -p /var/lib/mysql && \
-    chown -R docker:docker /var/lib/mysql
-RUN mkdir -p /etc/mysql && \
-    chown -R docker:docker /etc/mysql
 RUN chown -R www-data:www-data /var/www/
 
 USER docker
+
 CMD /bin/bash

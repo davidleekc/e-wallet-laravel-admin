@@ -41,21 +41,11 @@ services:
     image: mysql:5.7
     container_name: mysql-db
     restart: unless-stopped
-    tty: true
-    ports:
-      - "3306:3306"
-    environment:
-      # MYSQL_DATABASE: laraveladmindb
-      # MYSQL_ROOT_PASSWORD: 9xPatQHvhAW*lx&VEl
-      # MYSQL_PASSWORD: 9xPatQHvhAW*lx&VEl
-      # MYSQL_USER: laraveladmin
-      MYSQL_DATABASE: ewallet
-      MYSQL_ROOT_PASSWORD: Abcd1234
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
-    volumes:
-      - ./docker-compose/mysql/ewallet.sql:/var/lib/mysql/ewallet.sql
-      - ./docker-compose/mysql/my.cnf:/etc/mysql/my.cnf
+    environment:    
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
     networks:
       - ewallnet
  
