@@ -51,7 +51,8 @@ services:
       # MYSQL_USER: laraveladmin
       MYSQL_DATABASE: e-wallet
       MYSQL_ROOT_PASSWORD: Abcd1234
-      MYSQL_USER: root
+      MYSQL_USER: davidleekc
+      MYSQL_PASSWORD: ewalletpw
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
