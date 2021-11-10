@@ -2,14 +2,11 @@ version: '3.8'
 services:
   #PHP Service
   app:
-    build:
-      args:
-        user: davidleekc
-        uid: 1000
-      context: ./
+    build:      
+      context: .
       dockerfile: Dockerfile
     image: ewallet
-    container_name: laravel-app
+    container_name: app
     restart: unless-stopped
     tty: true
     environment:
@@ -23,14 +20,14 @@ services:
       - ewallnet
 
   #Nginx Service
-  nginx:
+  webserver:
     image: nginx:alpine
-    container_name: nginx-alpine
+    container_name: webserver
     restart: unless-stopped
     tty: true
     ports:
-      - "8080:8080"
-      - "8443:8443"
+      - "80:80"
+      - "443:443"
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx/conf.d/:/etc/nginx/conf.d/

@@ -46,11 +46,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
-# Create system user to run Composer and Artisan Commands
-RUN mkdir -p /home/www/.composer && \
-    chown -R www:www /home/www
-RUN chown -R www-data:www-data /var/www/
-
 # Copy existing application directory contents
 COPY . /var/www
 
