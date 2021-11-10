@@ -26,8 +26,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:8080"
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx/conf.d/:/etc/nginx/conf.d/
